@@ -1,0 +1,214 @@
+{
+  "default": [
+    {
+      "expression": "*.4chan.org",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "jkXc_Nq42"
+    },
+    {
+      "expression": "*.artofproblemsolving.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "HlVuDctuF"
+    },
+    {
+      "expression": "*.bc.instructure.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "Pobvyo-Rc"
+    },
+    {
+      "expression": "*.boards.4chan.org",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "rtrc1jD5G"
+    },
+    {
+      "expression": "*.ecollege.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "odyZOdLbH"
+    },
+    {
+      "expression": "*.freecodecamp.org",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "3HWfTxBO"
+    },
+    {
+      "expression": "*.google.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "FbksCuwbo"
+    },
+    {
+      "expression": "*.instructure.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "8uwaCLG-i"
+    },
+    {
+      "expression": "*.lhh.tutor.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "ekym8Ism4Z"
+    },
+    {
+      "expression": "*.login.microsoftonline.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "0-_BBPRMh"
+    },
+    {
+      "expression": "*.mathcha.io",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "AUGuI_Ugo"
+    },
+    {
+      "expression": "*.mypearson.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "_5Fn0jT0N"
+    },
+    {
+      "expression": "*.openvellum.ecollege.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "rxQwrTu96"
+    },
+    {
+      "expression": "*.pearsoned.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "PmqUUHkHU"
+    },
+    {
+      "expression": "*.pearsonmylabandmastering.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "L6dFR7G7R"
+    },
+    {
+      "expression": "*.pi.pearsoned.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "8d5urH057"
+    },
+    {
+      "expression": "*.portal.mypearson.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "ZKIGGFFXz"
+    },
+    {
+      "expression": "*.tutor.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "9yLTFGcgy"
+    },
+    {
+      "expression": "*.youtube.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "mtI7J_cPM"
+    },
+    {
+      "expression": "artofproblemsolving.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "nJ3nDubRv"
+    },
+    {
+      "expression": "bc.instructure.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "Oxh1eIQm7"
+    },
+    {
+      "expression": "boards.4chan.org",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "U-Xcxd4Vl"
+    },
+    {
+      "expression": "freecodecamp.org",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "8Ar1AQLJ"
+    },
+    {
+      "expression": "lhh.tutor.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "rn7NUc3IO"
+    },
+    {
+      "expression": "login.microsoftonline.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "79oy9x4DY"
+    },
+    {
+      "expression": "mathcha.io",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "RLIul4Ltp"
+    },
+    {
+      "expression": "openvellum.ecollege.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "-nJZwOvNdm"
+    },
+    {
+      "expression": "pearsonmylabandmastering.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "--9adKGiE"
+    },
+    {
+      "expression": "pi.pearsoned.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "DJIEz273N"
+    },
+    {
+      "expression": "portal.mypearson.com",
+      "listType": "WHITE",
+      "storeId": "default",
+      "cookieNames": [],
+      "id": "ArB2_0_9CR"
+    }
+  ]
+}

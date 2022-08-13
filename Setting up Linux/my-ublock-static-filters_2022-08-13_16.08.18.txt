@@ -1,0 +1,88 @@
+! 6/26/2019 https://www.reddit.com
+www.reddit.com##.cdpEVZ.btnn1d-5 > .fePAzF.ii4q9d-0 > .googad.box_ad.adsense-ad.ads-area.adbox1.adbar.ad-banner.ad-300-250.SidebarAd.LeftAd.InArticleAd.HomeAds.GoogleAd._4ELfhcLRELWhYrOp6R4se
+www.reddit.com##div.fePAzF.ii4q9d-0:nth-of-type(2) > .googad.box_ad.adsense-ad.ads-area.adbox1.adbar.ad-banner.ad-300-250.SidebarAd.LeftAd.InArticleAd.HomeAds.GoogleAd._4ELfhcLRELWhYrOp6R4se
+
+! 7/6/2019 https://www.reddit.com
+www.reddit.com##div._2vEf-C2keJaBMY9qk_BxVn:nth-of-type(2) > ._1G4yU68P50vRZ4USXfaceV.avKlJzxZU3brq4nAX0_i1
+www.reddit.com##._1G4yU68P50vRZ4USXfaceV._160axjzy-Hx7ANXMr87Rbe
+www.reddit.com##._1vYrJH5uc57mZQJPN4l34E > ._2vEf-C2keJaBMY9qk_BxVn > ._1G4yU68P50vRZ4USXfaceV.avKlJzxZU3brq4nAX0_i1
+
+! 7/30/2019 https://www.forbes.com
+www.forbes.com###brightcove_perform_0_html5_api
+www.forbes.com###brightcove_perform_0
+www.forbes.com##.video-close
+
+! 11/12/2019 https://www.symbolab.com
+||www.symbolab.com/public/images/Symbolab-Practice.png$image
+www.symbolab.com##a.embedPost.externalLink:nth-of-type(3)
+www.symbolab.com##a.embedPost.externalLink:nth-of-type(4)
+www.symbolab.com##.print-hide.sidebar-content > .new_solution_box_title > h2
+
+! 11/14/2019 https://www.symbolab.com
+||www.symbolab.com/public/images/Symbolab-Notebook.png$image
+
+! 1/25/2020 https://www.symbolab.com
+www.symbolab.com##.nl-cookiepolicy
+
+! 2/24/2020 https://www.freecodecamp.org
+www.freecodecamp.org##.modal-body
+www.freecodecamp.org##.modal.in.donation-modal.fade
+www.freecodecamp.org##.in.modal-backdrop.fade
+
+! 2/28/2020 https://css-tricks.com
+css-tricks.com###all-ads
+
+! 3/1/2020 https://drop.com
+drop.com##.modal__container_cell
+drop.com##.modal__container_table__lock_page_scroll.modal__container_table
+drop.com##.modal__overlay
+
+! 3/1/2020 https://www.geeksforgeeks.org
+www.geeksforgeeks.org##div.widget_text.widget
+www.geeksforgeeks.org##.textwidget > p
+www.geeksforgeeks.org###text-14 > .textwidget
+www.geeksforgeeks.org###text-15 > .textwidget
+
+! 3/23/2020 https://www.youtube.com
+www.youtube.com###clarify-box > .ytd-watch-flexy.style-scope
+
+! 2020-10-03 https://www.facebook.com
+www.facebook.com##.nfl8ryma.uo3d90p7.l82x9zwi.nhadk0th.t7yuvbsa.cxgpxx05.sj5x9vvc.m7uviv85.l0iu167d.c0q862w0.t9iwz95q
+
+! 2020-10-04 https://twitter.com
+twitter.com##.r-xnswec.r-urgr8i.css-1dbjc4n
+
+! 2021-07-30 https://quizlet.com
+quizlet.com##.UINotification--default.UINotification
+quizlet.com##.m8h3q9r
+
+! 2021-08-03 https://quizlet.com
+||assets.quizlet.com/a/j/dist/i/upgrade/dots.c510d1559febce1.svg$image
+||assets.quizlet.com/a/j/dist/i/upgrade/dots.c510d1559febce1.svg$image
+quizlet.com##.m2ejhsa.is-open.is-white.UIModal-container.UIModal
+
+! 2021-11-06 https://www.codecademy.com
+www.codecademy.com##.ebnwbv90.gamut-1tf06mo-Box
+
+! 2021-11-10 https://www.geeksforgeeks.org
+www.geeksforgeeks.org##.login-modal-div
+
+! 2022-01-24 https://www.facebook.com
+www.facebook.com##.kr520xx4.pmk7jnqg.qp9yad78.j34wkznp > .j83agx80.du4w35lb.l9j0dhe7.rq0escxv
+
+! 2022-06-02 https://www.youtube.com
+www.youtube.com##img.ytd-yoodle-renderer.style-scope
+
+! 2022-06-12 https://www.freecodecamp.org
+www.freecodecamp.org##.banner
+
+https://googleadservices.com
+https://analyticsengine.s3.amazonaws.com
+https://affiliationjs.s3.amazonaws.com
+https://advertising-api-eu.amazon.com
+https://amazonclix.com
+https://advertising.twitter.com
+https://widgets.pinterest.com
+https://d.reddit.com
+https://advice-ads.s3.amazonaws.com
+

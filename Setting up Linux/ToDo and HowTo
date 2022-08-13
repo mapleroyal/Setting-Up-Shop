@@ -1,0 +1,77 @@
+**********************************************
+- DATE MENU FORMATTER (vertical)
+EEE\nd MMM\n\nkkmm\n'hrs'
+
+**********************************************
+- DATE MENU FORMATTER (horizontal)
+EEE',' d MMM     kkmm 'hrs'
+
+**********************************************
+- KDE DOLPHIN DARK MODE IN GNOME UBUNTU
+https://askubuntu.com/questions/1398118/applyin-gtk-themes-to-dolphin
+
+**********************************************
+- MONITOR RESOLUTION NOT CORRECT
+https://www.youtube.com/watch?v=LxuB1QJ9eeI
+
+**********************************************
+- SHARING FOLDERS WITH VM
+https://youtu.be/9FBhcOnCxM8?t=431
+There will not be dropdowns for Type or Mode, instead change the Driver dropdown to virtio-9p.
+
+**********************************************
+- INSTALL VSCODE IF NOT FROM SNAP STORE
+First, avoid the no_pubkey error by first running:
+
+sudo apt install -y gnome-keyring
+and set (or don't set) a password
+
+Then, follow the install steps at
+https://code.visualstudio.com/docs/setup/linux
+as described below:
+
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt install apt-transport-https
+sudo apt update
+^THIS IS WHERE YOU MIGHT GET THE PUBKEY ERROR, IF SO FIX IT WITH:
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+NOW CONTINUE:
+sudo apt install code
+
+**********************************************
+- INSTALL TOUCHEGG TOUCHE
+Touchegg is a library or whatever that allows touchpad gestures, and touche is the GUI used to configure the gestures
+
+Install touchegg:
+sudo add-apt-repository ppa:touchegg/stable
+sudo apt update
+^THIS IS WHERE YOU'LL GET A GPG ERROR ABOUT NO_PUBKEY WITH A CODE AT THE END
+sudo add-apt-repository --remove ppa:touchegg/stable
+sudo apt update
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0FCE32AF6B96252 (where the code at the end is whatever code you got in the error above)
+sudo add-apt-repository ppa:touchegg/stable
+sudo apt update
+sudo apt install touchegg
+sudo apt update
+^IF NO ERROR, ALL GOOD
+- now install touche flatpak
+- now you can configure touchpad for gestures
+
+**********************************************
+- INSTALL CHROME
+via .deb file from official site
+
+**********************************************
+- FIX BUZZING SOUND WHEN NO AUDIO PLAYING
+In /etc/pulse/default.pa and /etc/pulse/system.pa, comment out the following line:
+load-module module-suspend-on-idle
+
+**********************************************
+- SHOW ALL MANUALLY/INTENTIONALLY INSTALLED APPS
+comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
