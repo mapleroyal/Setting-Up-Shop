@@ -1,5 +1,0 @@
-install with
-dconf load /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/ < ~/ubuntu1.dconf
-taking care to replace
-- b1dcc9dd-5262-4d8d-a863-c897e6d979b9 with the value of an existing profile code found in preferences > click on a profile > look in bottom right of window
-- ~/ubuntu1.dconf with the location of the profile document you're trying to load
