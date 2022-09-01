@@ -1,0 +1,50 @@
+{
+  "timeStamp": 1662036847263,
+  "version": "1.44.0",
+  "userSettings": {
+    "importedLists": []
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-abuse",
+    "ublock-unbreak",
+    "adguard-generic",
+    "adguard-mobile",
+    "easylist",
+    "adguard-spyware",
+    "adguard-spyware-url",
+    "block-lan",
+    "easyprivacy",
+    "urlhaus-1",
+    "curben-phishing",
+    "curben-pup",
+    "adguard-annoyance",
+    "adguard-social",
+    "fanboy-thirdparty_social",
+    "fanboy-cookiemonster",
+    "fanboy-annoyance",
+    "fanboy-social",
+    "ublock-annoyances",
+    "dpollock-0",
+    "plowe-0"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "about-scheme",
+    "chrome-extension-scheme",
+    "chrome-scheme",
+    "edge-scheme",
+    "moz-extension-scheme",
+    "opera-scheme",
+    "vivaldi-scheme",
+    "wyciwyg-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false",
+  "userFilters": "! 6/26/2019 https://www.reddit.com\nwww.reddit.com##.cdpEVZ.btnn1d-5 > .fePAzF.ii4q9d-0 > .googad.box_ad.adsense-ad.ads-area.adbox1.adbar.ad-banner.ad-300-250.SidebarAd.LeftAd.InArticleAd.HomeAds.GoogleAd._4ELfhcLRELWhYrOp6R4se\nwww.reddit.com##div.fePAzF.ii4q9d-0:nth-of-type(2) > .googad.box_ad.adsense-ad.ads-area.adbox1.adbar.ad-banner.ad-300-250.SidebarAd.LeftAd.InArticleAd.HomeAds.GoogleAd._4ELfhcLRELWhYrOp6R4se\n\n! 7/6/2019 https://www.reddit.com\nwww.reddit.com##div._2vEf-C2keJaBMY9qk_BxVn:nth-of-type(2) > ._1G4yU68P50vRZ4USXfaceV.avKlJzxZU3brq4nAX0_i1\nwww.reddit.com##._1G4yU68P50vRZ4USXfaceV._160axjzy-Hx7ANXMr87Rbe\nwww.reddit.com##._1vYrJH5uc57mZQJPN4l34E > ._2vEf-C2keJaBMY9qk_BxVn > ._1G4yU68P50vRZ4USXfaceV.avKlJzxZU3brq4nAX0_i1\n\n! 7/9/2019 https://www.pornhub.com\nwww.pornhub.com##.active.fanclub-info-pop\n\n! 7/30/2019 https://www.forbes.com\nwww.forbes.com###brightcove_perform_0_html5_api\nwww.forbes.com###brightcove_perform_0\nwww.forbes.com##.video-close\n\n! 11/12/2019 https://www.symbolab.com\n||www.symbolab.com/public/images/Symbolab-Practice.png$image\nwww.symbolab.com##a.embedPost.externalLink:nth-of-type(3)\nwww.symbolab.com##a.embedPost.externalLink:nth-of-type(4)\nwww.symbolab.com##.print-hide.sidebar-content > .new_solution_box_title > h2\n\n! 11/14/2019 https://www.symbolab.com\n||www.symbolab.com/public/images/Symbolab-Notebook.png$image\n\n! 1/25/2020 https://www.symbolab.com\nwww.symbolab.com##.nl-cookiepolicy\n\n! 2/24/2020 https://www.freecodecamp.org\nwww.freecodecamp.org##.modal-body\nwww.freecodecamp.org##.modal.in.donation-modal.fade\nwww.freecodecamp.org##.in.modal-backdrop.fade\n\n! 2/28/2020 https://css-tricks.com\ncss-tricks.com###all-ads\n\n! 3/1/2020 https://drop.com\ndrop.com##.modal__container_cell\ndrop.com##.modal__container_table__lock_page_scroll.modal__container_table\ndrop.com##.modal__overlay\n\n! 3/1/2020 https://www.geeksforgeeks.org\nwww.geeksforgeeks.org##div.widget_text.widget\nwww.geeksforgeeks.org##.textwidget > p\nwww.geeksforgeeks.org###text-14 > .textwidget\nwww.geeksforgeeks.org###text-15 > .textwidget\n\n! 3/23/2020 https://www.youtube.com\nwww.youtube.com###clarify-box > .ytd-watch-flexy.style-scope\n\n! 2020-10-03 https://www.facebook.com\nwww.facebook.com##.nfl8ryma.uo3d90p7.l82x9zwi.nhadk0th.t7yuvbsa.cxgpxx05.sj5x9vvc.m7uviv85.l0iu167d.c0q862w0.t9iwz95q\n\n! 2020-10-04 https://twitter.com\ntwitter.com##.r-xnswec.r-urgr8i.css-1dbjc4n\n\n! 2021-07-30 https://quizlet.com\nquizlet.com##.UINotification--default.UINotification\nquizlet.com##.m8h3q9r\n\n! 2021-08-03 https://quizlet.com\n||assets.quizlet.com/a/j/dist/i/upgrade/dots.c510d1559febce1.svg$image\n||assets.quizlet.com/a/j/dist/i/upgrade/dots.c510d1559febce1.svg$image\nquizlet.com##.m2ejhsa.is-open.is-white.UIModal-container.UIModal\n\n! 2021-11-06 https://www.codecademy.com\nwww.codecademy.com##.ebnwbv90.gamut-1tf06mo-Box\n\n! 2021-11-10 https://www.geeksforgeeks.org\nwww.geeksforgeeks.org##.login-modal-div\n\n! 2022-01-24 https://www.facebook.com\nwww.facebook.com##.kr520xx4.pmk7jnqg.qp9yad78.j34wkznp > .j83agx80.du4w35lb.l9j0dhe7.rq0escxv\n\n! 2022-06-02 https://www.youtube.com\nwww.youtube.com##img.ytd-yoodle-renderer.style-scope\n\n! 2022-06-12 https://www.freecodecamp.org\nwww.freecodecamp.org##.banner\n\nhttps://googleadservices.com\nhttps://analyticsengine.s3.amazonaws.com\nhttps://affiliationjs.s3.amazonaws.com\nhttps://advertising-api-eu.amazon.com\nhttps://amazonclix.com\nhttps://advertising.twitter.com\nhttps://widgets.pinterest.com\nhttps://d.reddit.com\n"
+}
