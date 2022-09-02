@@ -82,12 +82,45 @@ comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-
 color picker
 dash to panel
 date menu formatter
-quick close overview
+quick close in overview
+desktop icons NG (DING)
+places status indicator
 sound input & output device chooser
 tiling assistant
 toggle night light
+tray icons
 
-- PACKAGES
+- PACKAGES FOR ARCH
+git
+pamac
+files (nautilus)
+firefox
+gedit
+variety
+yay-git
+wget
+networkmanager
+neofetch
+nano
+wpa_supplicant
+which
+visual-studio-code-bin
+touche
+tochegg
+sushi
+qimgv
+pamac-gtk
+os-prober
+noto-fonts
+nautilus-admin
+nautilus-empty-file
+mhwd
+mhwd-db
+manjaro-settings-manager
+gnome-terminal-transparency
+emote
+
+- PACKAGES FOR PREVIOUS UBUNTU INSTALL
 brightness-controller
 dconf-editor
 discord
@@ -113,9 +146,3 @@ transmission-gtk
 variety
 virt-manager
 zsh
-
-- APPS
-vscode
-emote
-chrome
-edge
