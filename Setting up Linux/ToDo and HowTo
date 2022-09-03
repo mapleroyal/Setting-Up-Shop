@@ -2,6 +2,7 @@
 - ERROR: discover currently cannot be used to install any apps arch
 pacman -S packagekit-qt5
 https://unix.stackexchange.com/a/679145
+also consider pacman -S fwupd to get firmware updates
 
 **********************************************
 - DATE MENU FORMATTER (vertical)
@@ -97,7 +98,7 @@ tray icons
 
 - PACKAGES FOR ARCH
 git
-pamac
+pamac-aur
 files (nautilus)
 firefox
 gedit
@@ -114,7 +115,6 @@ touche
 tochegg
 sushi
 qimgv
-pamac-gtk
 os-prober
 noto-fonts
 nautilus-admin
