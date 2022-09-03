@@ -1,4 +1,17 @@
 **********************************************
+- KDE HTML CLOCK SETTINGS
+<html>
+<body>
+<center>
+<span style="font-size: 17px; color: white;">{DDD:u}, {d:00} {MM} </span>
+<span style="font-size: 17px; color: white;">&nbsp;&nbsp;{hh}</span>
+<span style="font-size: 17px; color: white;">{ii}</span>
+</center>
+</body>
+</html>
+
+
+**********************************************
 - ERROR: discover currently cannot be used to install any apps arch
 pacman -S packagekit-qt5
 https://unix.stackexchange.com/a/679145
