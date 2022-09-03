@@ -1,15 +1,63 @@
 **********************************************
+- GETTING ZSH SET UP
+Check shell with
+echo $SHELL
+
+Install
+sudo pacman -S zsh zsh-completions
+
+Switch to zsh with
+chsh -s /path/to/zsh
+
+Install oh my zsh
+https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+Install the three zsh extensions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+
+Run
+source ~/.zshrc
+
+Change these lines in ~/.zshrc
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
+
+Add these two lines to the bottom of ~/.zshrc
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+If those lines don't make history substring search work, try these two lines instead
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+**********************************************
+- NO AUDIO OUTPUT OR INPUT DEVICES FOUND
+sudo pacman -S sof-firmware
+
+**********************************************
+- DISABLE RIGHT CLICK ON TOUCHPAD CORNERS
+add
+#!/bin/bash
+synclient RightButtonAreaLeft=0
+synclient RightButtonAreaTop=0
+to a blank .sh file, make it executable, then add it to startup scripts
+
+**********************************************
 - KDE HTML CLOCK SETTINGS
 <html>
 <body>
 <center>
-<span style="font-size: 17px; color: white;">{DDD:u}, {d:00} {MM} </span>
+<span style="font-size: 17px; color: white;">&nbsp;&nbsp;{DDD:u}, {d:00} {MM} </span>
 <span style="font-size: 17px; color: white;">&nbsp;&nbsp;{hh}</span>
 <span style="font-size: 17px; color: white;">{ii}</span>
 </center>
 </body>
 </html>
-
 
 **********************************************
 - ERROR: discover currently cannot be used to install any apps arch
