@@ -1,4 +1,28 @@
 **********************************************
+- TAP TO CLICK IS GRAYED OUT IN KDE
+You have to be using wayland. When using wayland, gestures may get fucky. See the next tip on touchpad gestures to resolve it.
+
+**********************************************
+- GET TOUCHPAD GESTURES AND PALM REJECTION WORKING IN KDE
+1. use wayland, because only it supports libinput rather than synaptics
+2. install
+sudo pacman -S --needed wmctrl xdotool
+git clone https://github.com/bulletmark/libinput-gestures.git
+cd libinput-gestures
+sudo ./libinput-gestures-setup install
+(or if that doesn't work, i think you just need to install libinput-gestures, more info at the site on the next line)
+https://github.com/bulletmark/libinput-gestures
+This command makes it start with the system
+libinput-gestures-setup autostart start
+Put the conf file here:
+~/.config/libinput-gestures.conf
+use
+libinput-gestures-setup stop
+and
+libinput-gestures-setup start
+to make it recognize new changes to the conf file whenever you make adjustments to it
+
+**********************************************
 - GETTING ZSH SET UP
 Check shell with
 echo $SHELL
