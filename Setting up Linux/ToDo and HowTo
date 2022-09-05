@@ -1,4 +1,9 @@
 **********************************
+ENABLE BLUETOOTH
+>> sudo pacman -S bluez-utils
+>> systemctl enable --now bluetooth.service
+
+**********************************
 MAKE SURE YOU ADD USER.NAME AND USER.EMAIL TO GIT
 >> git config --global user.name "FIRST_NAME LAST_NAME"
 >> git config --global user.email "MY_NAME@example.com"
@@ -17,6 +22,7 @@ OTHER
 - change to dark theme
 - change desktops to 4 and only 1 row, disable wraps around
 - fix power settings (mainly when to dim and turn off display, but also the low-battery settings)
+- set clipboard history to 1000
 
 ************************
 DOLPHIN
@@ -151,9 +157,9 @@ to a blank .sh file, make it executable, then add it to startup scripts
 <html>
 <body>
 <center>
-<span style="font-size: 17px; color: white;">&nbsp;{DDD:u}, {d:00} {MM} </span>
-<span style="font-size: 17px; color: white; font-weight: bold;">&nbsp;{hh}</span>
-<span style="font-size: 17px; color: white;">{ii}</span>
+<span style="font-size: 15px; color: white;">&nbsp;{DDD:u}, {d:00} {MM} </span>
+<span style="font-size: 15px; color: white; font-weight: bold;">&nbsp;{hh}</span>
+<span style="font-size: 15px; color: white;">{ii}</span>
 </center>
 </body>
 </html>
