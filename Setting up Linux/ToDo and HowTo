@@ -35,8 +35,7 @@ DISPLAY
 https://wiki.archlinux.org/title/xrandr#Permanently_adding_undetected_resolutions
 >> xrandr
 >> cvt 2560 1440
->> xrandr --newmode "2560x1440 60.00"
-312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +vsync
+>> xrandr --newmode "2560x1440_60.00" 312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +vsync
 >> xrandr --addmode DP-3-2 2560×1440_60.00
 >> xrandr --output DP-3-2 --mode 2560×1440_60.00
 # on some systems, with kernel 5.15.60-1, this will cause the screen to go black for a
@@ -160,6 +159,20 @@ to a blank .sh file, make it executable, then add it to startup scripts
 <span style="font-size: 15px; color: white;">&nbsp;{DDD:u}, {d:00} {MM} </span>
 <span style="font-size: 15px; color: white; font-weight: bold;">&nbsp;{hh}</span>
 <span style="font-size: 15px; color: white;">{ii}</span>
+</center>
+</body>
+</html>
+
+or for vertical taskbar
+
+<html>
+<body>
+<center>
+<span style="font-size: 10px; color: white; font-weight: bold;">{DD:u}&nbsp;&nbsp;</span>
+<br>
+<span style="font-size: 10px; color: white; font-weight: bold;">{d:00}&nbsp;&nbsp;</span>
+<br>
+<span style="font-size: 10px; color: white; font-weight: bold;">{hh}{ii}</span>
 </center>
 </body>
 </html>
