@@ -1,3 +1,72 @@
+**********************************
+TRANSPARENT KONSOLE TERMINAL BACKGROUND
+Add a kwin rule with 90% opacity. Enable blur from desktop effects & enable background blur from konsole profile > appearance section.
+
+**********************************
+MOUSE/TOUCHPAD
+- disable bottom corner right click, change to press with two fingers anywhere
+- invert scrolling
+- disable tap-and-drag
+
+OTHER
+- change to dark theme
+- change desktops to 4 and only 1 row, disable wraps around
+- fix power settings (mainly when to dim and turn off display, but also the low-battery settings)
+
+************************
+DOLPHIN
+- settings > uncheck "show selection marker"
+- overflow > show hidden files; show panels > terminal
+
+************************
+DISPLAY
+- fix wrong resolution on big monitor (add custom resolution, this method only works in x11)
+https://wiki.archlinux.org/title/xrandr#Permanently_adding_undetected_resolutions
+>> xrandr
+>> cvt 2560 1440
+>> xrandr --newmode "2560x1440 60.00"
+312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +vsync
+>> xrandr --addmode DP-3-2 2560×1440_60.00
+>> xrandr --output DP-3-2 --mode 2560×1440_60.00
+# on some systems, with kernel 5.15.60-1, this will cause the screen to go black for a
+couple seconds any time the mouse moves near the bottom left or top left quadrants; this can be fixed by switching kernels
+# then to make the resolution permanent.
+>> sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
+# paste in the following, then save it
+Section "Monitor"
+    Identifier "VGA1"
+    Modeline "2560x1440_60.00"  312.25  2560 2752 3024 3488 1440 1443 1448 1493 -hsync +VSVnC
+    Option "PreferredMode" 2560×1440_60.00
+EndSection
+
+************************
+GENERAL SETTINGS
+- virtual desktops > 1 row, 4 desktops
+- enable "overview" in workspace behavior > desktop effects (this is the metaw effect, aka expose or whatever) (this enables allows the middle-click-to-close functionality)
+- while there, can also enable wobbly windows and magic lamp, to get the mac-like feel (i disabled wobbly windows because they made it look broken when you snap to an edge), and slide back
+- also there, in > screen edges, disable the corner
+- 24 hour clock: right click clock > configure digital clock > set "time display" to 24-
+hour
+- workspace > desktop session > enable "restore previous saved session"
+- shortcuts > custom shortcuts > enable "examples" and in there enable "run konsole" and change the shortcut to meta+return ** OR ** shortcuts > add application > konsole > find it in the list and add a shortcut
+- if you don't want hibernate, disable any hibernation related settings in (search hibernate) power management > activity power settings (all three tabs) and advanced power settings
+- window management > task switcher > get new task switchers > medium rounded dark > change visualization to medium rounded dark, , disable "show selected window"
+
+**********************************************
+- splash screen > none
+- desktop session > disable "confirm logout"
+
+
+**********************************************
+INSTALL YAY, SO YOU CAN INSTALL PAMAC
+cd /opt
+sudo git clone https://aur.archlinux.org/yay-git.git
+sudo chown -R tecmint:tecmint ./yay-git
+cd yay-git
+makepkg -si
+sudo yay -Syu
+sudo yay -S pamac-aur
+
 **********************************************
 - TAP TO CLICK IS GRAYED OUT IN KDE
 You have to be using wayland. When using wayland, gestures may get fucky. See the next tip on touchpad gestures to resolve it.
@@ -31,7 +100,7 @@ Install
 sudo pacman -S zsh zsh-completions
 
 Switch to zsh with
-chsh -s /path/to/zsh
+chsh -s /usr/bin/zsh
 
 Install oh my zsh
 https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
@@ -41,6 +110,7 @@ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%2
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 Install the three zsh extensions
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
@@ -76,8 +146,8 @@ to a blank .sh file, make it executable, then add it to startup scripts
 <html>
 <body>
 <center>
-<span style="font-size: 17px; color: white;">&nbsp;&nbsp;{DDD:u}, {d:00} {MM} </span>
-<span style="font-size: 17px; color: white;">&nbsp;&nbsp;{hh}</span>
+<span style="font-size: 17px; color: white;">&nbsp;{DDD:u}, {d:00} {MM} </span>
+<span style="font-size: 17px; color: white; font-weight: bold;">&nbsp;{hh}</span>
 <span style="font-size: 17px; color: white;">{ii}</span>
 </center>
 </body>
