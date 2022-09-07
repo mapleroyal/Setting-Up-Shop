@@ -1,4 +1,27 @@
 **********************************
+install kwalletmanager and set the password to an empty password, that way the system will not constantly nag you for yet another password every time it tries to do anything (this non-nagging is the default way on every other OS, it's separate from when things often ask you for your root/login password which is normal)
+
+**********************************
+KDE SETTINGS ADJUSTMENTS
+remember to toggle on the keyboard shortcuts for switching desktops left and right, that way i can use the mouse to switch desktops by assigning mouse keys to those keyboard shortcuts
+
+**********************************
+KEYCHRON K10 KEYBOARD
+The function keys will not disable, even after holding fn+x+l four 4 seconds in windows mode and seeing the keyboard respond by blinking. What's happening is that it is disabling (at least, it's now set that way in the keyboard, and if you do it again it will unset it), but linux hasn't been set up to acknowledge the change. To make the change noticed on the linux side, run
+>> echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
+and to make it permanent, run
+>> echo "options hid_apple fnmode=0" | sudo tee -a /etc/modprobe.d/hid_apple.conf
+(the above command simply adds the line
+options hid_apple fnmode=0
+to a file called hid_apple.conf, and creates the file if it doesn't exist).
+https://mikeshade.com/posts/keychron-linux-function-keys/
+
+Next, because you have to be in windows mode for the above to work, you can remap the meta key to be in mac mode by using Input Remapper
+>> sudo pacaur -S input-remapper-git
+
+May also be recommended to fix bluetooth constantly disconnecting requiring reboot, to do this requires disabling keyboard sleeping (happens after 10min of no use). Hold fn+s+o for 4 seconds.
+
+**********************************
 ENABLE BLUETOOTH
 >> sudo pacman -S bluez-utils
 >> systemctl enable --now bluetooth.service
@@ -203,6 +226,15 @@ https://www.youtube.com/watch?v=LxuB1QJ9eeI
 - SHARING FOLDERS WITH VM
 https://youtu.be/9FBhcOnCxM8?t=431
 There will not be dropdowns for Type or Mode, instead change the Driver dropdown to virtio-9p.
+
+**********************************************
+FIX VIRT-MANAGER (KVM) STATE INACTIVE
+>> sudo virsh net-start default
+https://www.xmodulo.com/network-default-is-not-active.html
+
+**********************************************
+INSTALL VIRT-MANAGER KVM/QEMU
+https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/
 
 **********************************************
 - INSTALL VSCODE IF NOT FROM SNAP STORE
