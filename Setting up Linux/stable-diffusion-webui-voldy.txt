@@ -1,0 +1,67 @@
+download anaconda 3 from https://www.anaconda.com/
+place it in home directory
+make sure it's executable
+>> ~/Anaconda3-2022.05-Linux-x86_64.sh
+add...
+export PATH="/home/stdiff/anaconda3/bin:$PATH"
+...to the bottom of .zshrc, then save it
+>> source ~/.zshrc
+close and reopen terminal
+check that...
+>> conda
+...actually exists, if not you've got to get it into your path somehow
+
+follow the instructions below from https://github.com/AUTOMATIC1111/stable-diffusion-webui
+
+# Clone webui repo
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+cd stable-diffusion-webui
+
+# Create and activate conda env
+conda env create -f environment-wsl2.yaml
+conda activate automatic
+
+[MY NOTE: AT THIS POINT YOU MAY NEED TO RUN
+>> conda init zsh
+TO GET CONDA INTO THE PATH AGAIN OR SOMETHING, I DON'T QUITE REMEMBER, BUT YOU'LL HAVE TO CLOSE AND REOPEN THE SHELL
+THE POINT IS TO REMEMBER AFTER YOU DO THAT STUFF, TO CD BACK INTO THE STABLE DIFFUSION DIRECTORY
+>> cd stable-diffusion-webui]
+
+# (optional) install requirements for GFPGAN (upscaling)
+wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth
+
+# clone repositories for Stable Diffusion and (optionally) CodeFormer
+mkdir repositories
+git clone https://github.com/CompVis/stable-diffusion.git repositories/stable-diffusion
+git clone https://github.com/CompVis/taming-transformers.git repositories/taming-transformers
+git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
+
+# install requirements of Stable Diffusion
+pip install transformers==4.19.2 diffusers invisible-watermark --prefer-binary
+
+# install k-diffusion
+pip install git+https://github.com/crowsonkb/k-diffusion.git --prefer-binary
+
+# (optional) install GFPGAN (face resoration)
+pip install git+https://github.com/TencentARC/GFPGAN.git --prefer-binary
+
+# (optional) install requirements for CodeFormer (face resoration)
+pip install -r repositories/CodeFormer/requirements.txt --prefer-binary
+
+# install requirements of web ui
+pip install -r requirements.txt  --prefer-binary
+
+# update numpy to latest version
+pip install -U numpy  --prefer-binary
+
+# (outside of command line) put stable diffusion model into web ui directory
+# the command below must output something like: 1 File(s) 4,265,380,512 bytes
+dir model.ckpt
+
+# (outside of command line) put the GFPGAN model into web ui directory
+# the command below must output something like: 1 File(s) 348,632,874 bytes
+dir GFPGANv1.3.pth
+
+start it with
+>> python webui.py
+when it says running on local URL:  http://127.0.0.1:7860, then you can go to that URL to use the program
