@@ -1,4 +1,82 @@
 **********************************
+VMWARE HORIZON, DOD CAC READER CERTS
+The instructions at the arch wiki work perfectly, https://wiki.archlinux.org/title/Common_Access_Card but to use vmware horizon you have to go into file > preferences > enable "Do not verify server identity certificates."
+
+Installation
+
+Install ccid and opensc from official repositories.
+Configuration
+
+Note: You should not have to edit your opensc configuration files by default. You should check all other setup items first (e.g. certificate imports)
+
+If your card reader does not have a pin pad, uncomment enable_pinpad = false in /etc/opensc.conf.
+
+Sometimes opensc can struggle to identify the proper driver for CAC, instead it may choose PIV or something else. You can force the CAC driver by editing /etc/opensc.conf for card_drivers = cac and force_card_driver = cac
+Enable pcscd
+
+Start and enable pcscd.socket.
+Configure browser
+
+    Go to: https://public.cyber.mil/pki-pke/pkipke-document-library/
+    Download certs: "PKI CA Certificate Bundles: PKCS#7 For DoD PKI Only - Version 5.9" (ZIP Download)
+    Unzip the DoD PKI zip
+    Follow browser-specific instructions
+
+Firefox
+Load security device
+
+Navigate to Edit -> Preference -> Advanced -> Certificates -> Security Devices and click "Load" to load a module using /usr/lib/opensc-pkcs11.so or /usr/lib/pkcs11/opensc-pkcs11.so.
+
+Note: Firefox may report the module did not load correctly however you will have to check in the security devices to confirm whether the module properly loaded or not
+Import the DoD Certificates
+
+Install the certificates from the mentioned zip-file in this order, by going to Edit -> Preference -> Advanced -> Certificates -> View Certificates -> Authorities -> Import (make sure to at-least check the box for "Trust this CA to identify websites"):
+
+Note: As of the 5.9 version of the certificate zip
+
+    Certificates_PKCS7_v5.9_DoD.der.p7b
+    Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_2.der.p7b
+    Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_3.der.p7b
+    Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_4.der.p7b
+    Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_5.der.p7b
+    Certificates_PKCS7_v5.9_DoD.pem.p7b
+
+Chromium/Google Chrome
+
+1. Add the CAC Module to the NSS DB.
+
+Ensure that your CAC is connected, that Chromium is closed and enter the following in a terminal: $ modutil -dbdir sql:$HOME/.pki/nssdb/ -add "CAC Module" -libfile /usr/lib/opensc-pkcs11.so
+
+Note: You may see the message 'Failure to load dynamic library'. This can be ignored.
+
+Upon success you will see "Module "CAC Module" added to database."
+
+2. Check if the CAC Module was successfully added with $ modutil -dbdir sql:$HOME/.pki/nssdb/ -list
+
+Tango-inaccurate.pngThe factual accuracy of this article or section is disputed.Tango-inaccurate.png
+
+Reason: The following step is NOT WORKING WITH v5.4 of certs because Chrome does not exist in the filenames, I think it should be Certificate instead of Chrome) (Discuss in Talk:Common Access Card)
+
+3. Navigate (in a shell) to the location of the unzip DoD PKI files and install via:
+
+ for n in $(ls * | grep Chrome); do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
+
+or
+
+Re-open Chrome, Navigate to Settings -> Show Advanced Settings -> Manage Certificates -> Authorities to load CA bundle from the PEM-formatted file from above.
+
+4. Verify the authority is in Chrome under Settings -> Show Advanced Settings -> Manage Certificates -> Authorities then expand "org-U.S. Government" and you should see a number of "DoD" certificates listed.
+VMware Horizon Client
+
+Install vmware-horizon-clientAUR, vmware-horizon-usbAUR, and vmware-horizon-smartcardAUR. Start and enable vmware-horizon-usb.service.
+
+To integrate CAC authentication with the VMware Horizon Client, create the directory /usr/lib/vmware/view/pkcs11 and link the pkcs11 library:
+
+# ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
+
+
+
+**********************************
 install kwalletmanager and set the password to an empty password, that way the system will not constantly nag you for yet another password every time it tries to do anything (this non-nagging is the default way on every other OS, it's separate from when things often ask you for your root/login password which is normal)
 
 **********************************
@@ -84,8 +162,6 @@ hour
 - shortcuts > custom shortcuts > enable "examples" and in there enable "run konsole" and change the shortcut to meta+return ** OR ** shortcuts > add application > konsole > find it in the list and add a shortcut
 - if you don't want hibernate, disable any hibernation related settings in (search hibernate) power management > activity power settings (all three tabs) and advanced power settings
 - window management > task switcher > get new task switchers > medium rounded dark > change visualization to medium rounded dark, , disable "show selected window"
-
-**********************************************
 - splash screen > none
 - desktop session > disable "confirm logout"
 
@@ -107,7 +183,7 @@ You have to be using wayland. When using wayland, gestures may get fucky. See th
 **********************************************
 - GET TOUCHPAD GESTURES AND PALM REJECTION WORKING IN KDE
 1. use wayland, because only it supports libinput rather than synaptics
-2. install
+2. things should work, but if they aren't, consider the following. Install
 sudo pacman -S --needed wmctrl xdotool
 git clone https://github.com/bulletmark/libinput-gestures.git
 cd libinput-gestures
