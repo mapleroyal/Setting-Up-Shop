@@ -1,4 +1,21 @@
 **********************************
+INSTALLING WINDOWS IN KVM/QEMU
+https://youtu.be/wxxP39cNJOs?t=404
+In a nutshel:
+- install virt-manger etc
+- in virt-manager preferences, make sure enable xml editing is enabled
+- when setting up vm settings with the win10 iso, change the NIC "Device model" and the SATA Disk 1 "Disk bus" to "virtio"
+- change CPUs as needed
+- get the following file:
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/
+^ here, go into the most recent folder and get virtio-win.iso
+- back in virt-manager do add hardware > storage > and set Device Type to CDROM
+- in SATA CDROM 2 mount the virtio-win.iso
+- begin installation
+- when you get to the part where you have a button about Custom Install, choose that and select load driver > ok > file that ends in w10\viostor.inf
+- next > proceed with normal install and setup
+
+**********************************
 VMWARE HORIZON, DOD CAC READER CERTS
 The instructions at the arch wiki work perfectly, https://wiki.archlinux.org/title/Common_Access_Card but to use vmware horizon you have to go into file > preferences > enable "Do not verify server identity certificates."
 
