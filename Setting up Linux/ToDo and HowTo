@@ -1,4 +1,20 @@
 **********************************
+CHANGE LOCK SCREEN BACKGROUND AND LOGIN SCREEN (DISPLAY MANAGER) BACKGROUND IN PLASMA SDDM
+login screen: settings > startup and shutdown > login  screen (SDDM) > click the "change background" button when hovering over the theme you want to use
+lock screen: settings > workspace behavior > screen locking > select "configure" under "appearance"
+
+
+**********************************
+FIX TEAMVIEWER SIGNING OUT NOT STAYING SIGNED IN
+https://community.teamviewer.com/English/discussion/43766/teamviewer-13-not-staying-signed-in
+Stop daemon
+>> sudo teamviewer daemon stop
+Edit /opt/teamviewer/config/global.conf to add...
+[int32] AllowedConnectionProtocols = 12
+Restart the deamon...
+>> sudo teamviewer daemon start
+
+**********************************
 INSTALLING WINDOWS IN KVM/QEMU
 https://youtu.be/wxxP39cNJOs?t=404
 In a nutshel:
