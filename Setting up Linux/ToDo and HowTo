@@ -1,4 +1,9 @@
 **********************************
+NO GRUB AFTER INSTALLING WINDOWS
+https://youtu.be/gEB6JEYZekE?t=346
+use supergrub2 (install as bottable usb), when it boots choose to detect boot methods, select the distro install you want (the list might go much further down than what's shown, use arrows if needed), once in your distro install grub-customizer, file > install to MBR > then save if the configuration shows your distros > after reboot, it should default to grub, I'm not sure if windows showed in grub so the next step may be to make sure windows shows up
+
+**********************************
 CHANGE LOCK SCREEN BACKGROUND AND LOGIN SCREEN (DISPLAY MANAGER) BACKGROUND IN PLASMA SDDM
 login screen: settings > startup and shutdown > login  screen (SDDM) > click the "change background" button when hovering over the theme you want to use
 lock screen: settings > workspace behavior > screen locking > select "configure" under "appearance"
