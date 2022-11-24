@@ -1,4 +1,15 @@
 **********************************
+YUZU
+put prod.keys in /home/archer/.var/app/org.yuzu_emu.yuzu/data/yuzu/keys/
+put firmware files in /home/archer/.var/app/org.yuzu_emu.yuzu/data/yuzu/nand/system/Contents/registered/
+put mods (at least for pokemon scarlet) in /home/archer/.var/app/org.yuzu_emu.yuzu/data/yuzu/load/0100A3D008C5C000/
+
+RYUJINX
+put prod.keys in /home/archer/.var/app/org.ryujinx.Ryujinx/config/Ryujinx/system/
+install the firmware by opening ryujinx > tools > install firmware from zip > choose firmware
+put mods (at least for pokemon scarlet) in /home/archer/.var/app/org.ryujinx.Ryujinx/config/Ryujinx/mods/contents/0100a3d008c5c000/
+
+**********************************
 NO GRUB AFTER INSTALLING WINDOWS
 https://youtu.be/gEB6JEYZekE?t=346
 use supergrub2 (install as bottable usb), when it boots choose to detect boot methods, select the distro install you want (the list might go much further down than what's shown, use arrows if needed), once in your distro install grub-customizer, file > install to MBR > then save if the configuration shows your distros > after reboot, it should default to grub, I'm not sure if windows showed in grub so the next step may be to make sure windows shows up
