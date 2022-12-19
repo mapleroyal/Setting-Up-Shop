@@ -288,7 +288,7 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 **********************************************
-- NO AUDIO OUTPUT OR INPUT DEVICES FOUND
+- NO OUTPUT OR INPUT DEVICES FOUND (AUDIO)
 sudo pacman -S sof-firmware
 
 **********************************************
@@ -432,6 +432,10 @@ tiling assistant
 toggle night light
 tray icons
 
+**********************************************
+ADDITIONAL PACKAGES DURING ARCHINSTALL SCRIPT
+neofetch nano firefox git base base-devel zsh zsh-completions bluez-utils wget curl linux-headers linux-firmware noto-fonts noto-fonts-cjk noto-fonts-emoji tlp (only include tlp if using a laptop)
+
 - PACKAGES FOR ARCH
 git
 pamac-aur
@@ -448,7 +452,7 @@ wpa_supplicant
 which
 visual-studio-code-bin
 touche
-tochegg
+touchegg
 sushi
 qimgv
 os-prober
