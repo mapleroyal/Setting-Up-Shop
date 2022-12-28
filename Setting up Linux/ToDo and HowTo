@@ -19,7 +19,6 @@ CHANGE LOCK SCREEN BACKGROUND AND LOGIN SCREEN (DISPLAY MANAGER) BACKGROUND IN P
 login screen: settings > startup and shutdown > login  screen (SDDM) > click the "change background" button when hovering over the theme you want to use
 lock screen: settings > workspace behavior > screen locking > select "configure" under "appearance"
 
-
 **********************************
 FIX TEAMVIEWER SIGNING OUT NOT STAYING SIGNED IN
 https://community.teamviewer.com/English/discussion/43766/teamviewer-13-not-staying-signed-in
@@ -34,8 +33,11 @@ Restart the deamon...
 INSTALLING WINDOWS IN KVM/QEMU
 https://youtu.be/wxxP39cNJOs?t=404
 In a nutshel:
-- install virt-manger etc
-- in virt-manager preferences, make sure enable xml editing is enabled
+- install virt-manger etc, i really have no idea what each part is for so I just installed all this (sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat) from here https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/ and anything else it needs from that page (libguestfs, ebtables, iptables) without uninstalling anything that I currently have
+- remember to do this step from there also: sudo systemctl enable --now libvirtd.service
+- and then check that it's working  systemctl status libvirtd.service again all this stuff is on that page
+- in virt-manager, new vm > local install media
+- preferences > make sure enable xml editing is enabled
 - when setting up vm settings with the win10 iso, change the NIC "Device model" and the SATA Disk 1 "Disk bus" to "virtio"
 - change CPUs as needed
 - get the following file:
@@ -46,10 +48,12 @@ https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/
 - begin installation
 - when you get to the part where you have a button about Custom Install, choose that and select load driver > ok > file that ends in w10\viostor.inf
 - next > proceed with normal install and setup
+- windows won't have internet until you go into device manager and use the drivers on that iso (virtio-win.iso) to install the stuff that has a yellow exclamation in device manager
 
 **********************************
 VMWARE HORIZON, DOD CAC READER CERTS
-The instructions at the arch wiki work perfectly, https://wiki.archlinux.org/title/Common_Access_Card but to use vmware horizon you have to go into file > preferences > enable "Do not verify server identity certificates."
+The instructions at the arch wiki work perfectly, https://wiki.archlinux.org/title/Common_Access_Card
+When you're all done, to use vmware horizon you have to go into file > preferences > enable "Do not verify server identity certificates."
 
 Installation
 
@@ -223,7 +227,7 @@ sudo chown -R tecmint:tecmint ./yay-git
 cd yay-git
 makepkg -si
 sudo yay -Syu
-sudo yay -S pamac-aur
+sudo yay -S pamac-aur <- TRY WITHOUT SUDO IF GET ERROR
 
 **********************************************
 - TAP TO CLICK IS GRAYED OUT IN KDE
@@ -260,11 +264,13 @@ sudo pacman -S zsh zsh-completions
 Switch to zsh with
 chsh -s /usr/bin/zsh
 
-Install oh my zsh
+Install oh my zsh:
+download these:
 https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
 https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
 https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+and place them in /home/archer/.local/share/fonts on gnome (not sure where in KDE)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 Install the three zsh extensions
@@ -363,6 +369,9 @@ https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/
 
 **********************************************
 - INSTALL VSCODE IF NOT FROM SNAP STORE
+
+(in arch, it's visual-studio-code-bin)
+
 First, avoid the no_pubkey error by first running:
 
 sudo apt install -y gnome-keyring
@@ -491,3 +500,91 @@ transmission-gtk
 variety
 virt-manager
 zsh
+
+
+**********************************************
+ARCH GNOME GUIDE FOR XPS 9720
+
+- additional packages as described above
+- get firefox set up (git clone this repo, and add the settings for cookie autodelete and ublock origin)
+- install yay and pamac-aur per the instructions above
+- in pamac settings, toggle AUR on
+- download apps as needed (e.g. vs code (visual-studio-code-bin), discord, steam (native))
+^- to install steam, first enable multilib in /etc/pacman.conf like this:
+>> sudo nano /etc/pacman.conf
+uncomment these lines
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+exit and save with ctrl+x > ctrl+y > enter
+^then install steam (not steam native) from pamac
+- to install gnome extensions, you need the browser extension (linked in the gnome extensions website) and to get around the error "No such native application org.gnome.chrome_gnome_shell" you need gnome-browser-connector from the AUR
+- to get sound working, install sof-firmware
+- to get past the error "filesystem type ntfs3,ntfs not configured in kernel" when opening ntfs USB drives, do the following:
+>> sudo nano /etc/udisks2/mount_options.conf
+then add
+[defaults]
+ntfs_defaults=uid=$UID,gid=$GID,noatime,prealloc
+exit and save with ctrl+x > ctrl+y > enter
+- to get bluetooth working, run:
+>> sudo systemctl enable --now bluetooth.service
+- add keyboard shortcut for the terminal (called kgx):
+Settings > keyboard > view and customize shortcuts > custom shortcuts > add shortcut > Terminal; kgx; super + return > add
+- to theme qt apps, install kvantum > change/delete theme > select theme > use this theme, then:
+add the following to /etc/profile:
+# use kvantum as qt themer
+export QT_STYLE_OVERRIDE=kvantum
+- to make old gtk apps match the dark theme, install gnome-tweaks and gnome-themes-extra, then go into gnome-tweaks > appearance, and set "legacy applications" to "Adwaita-dark" (or whatever theme)
+- to change the GDM login wallpaper (this is not the same as the lockscreen wallpaper, which is just the desktop wallpaper but blurred) use arch-change-gdm-background from here: https://github.com/anirudhgupta109/arch-change-gdm-background
+- to get the fingerprint sensor working on this machine, install fprintd and then set up the fingerprint in settings (that's in gnome, not sure how to do it in other DEs)
+- to get back/forward gestures working in firefox, add MOZ_ENABLE_WAYLAND=1 to /etc/environment
+- to add kernel parameters, include it in the quoted section at the end of this line:
+GRUB_CMDLINE-LINX-DEFAULT=""
+inside /etc/default/grab
+then run
+>> sudo grub-update (may need to install grub-update first)
+that's from this guide here https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux
+
+Apps:
+variety, steam, discord, vscode, dconf editor (will need for some things like disabling double tap to drag)
+
+Extensions:
+- dash to panel
+https://extensions.gnome.org/extension/1160/dash-to-panel/
+https://github.com/home-sweet-gnome/dash-to-panel
+- clipboard history
+https://extensions.gnome.org/extension/4839/clipboard-history/
+https://github.com/SUPERCILEX/gnome-clipboard-history
+- AppIndicator and KStatusNotifierItem Support (needed to show discord, steam, variety, etc.)
+https://extensions.gnome.org/extension/615/appindicator-support/
+https://github.com/ubuntu/gnome-shell-extension-appindicator
+- tiling assistant (for better snapping)
+https://extensions.gnome.org/extension/3733/tiling-assistant/
+https://github.com/Leleat/Tiling-Assistant
+- quick close in overview
+https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
+https://github.com/p91paul/middleclickclose
+
+https://github.com/p91paul/middleclickclose
+
+Custom Settings:
+- Gedit
+	show line numbers, 4 spaces per tab, classic dark theme if you want, highlight current line, display overview map
+	
+- dconf editor
+	in /org/gnome/desktop/peripherals/touchpad/ disable tap-and-drag
+	in /org/gnome/desktop/peripherals/keyboard/ change delay to 300
+	in /org/gnome/nautilus/preferences/ enable always-use-location-entry in order to be able to click in the path
+
+TODO:
+X get bluetooth working
+- get audio sounding normal (possible lead is the reddit thread about modifying the kernel to enable subwoofers)
+X get login screen to show wallpaper (possible lead https://code.mendhak.com/synchronize-login-wallpaper-ubuntu/)
+- get left/right swipe back/forward working in firefox, it's supposed to work in linux as of a few versions ago
+- get nvidia stuff working
+	- eventually figure out how to have igpu running linux and dgpu running linux or windows in a VM for use with AI generators
+	- see arch wiki page for nvidia
+X get mouse button shortcuts working (overview, switch desktops, etc)
+X zsh and powerlevel10k
+- mhwd should be the manjaro settings manager app, to manage kernels and nvidia drivers
+- get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
+- !!!!!VMWARE HORIZON!!!!!
