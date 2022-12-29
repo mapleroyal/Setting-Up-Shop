@@ -517,6 +517,8 @@ uncomment these lines
 #Include = /etc/pacman.d/mirrorlist
 exit and save with ctrl+x > ctrl+y > enter
 ^then install steam (not steam native) from pamac
+if it doesn't show, the multilib database may not have been downloaded, so you can install it via CLI with
+>> sudo pacman -Sy steam (the -y part I guess forces it to get necessary databases)
 - to install gnome extensions, you need the browser extension (linked in the gnome extensions website) and to get around the error "No such native application org.gnome.chrome_gnome_shell" you need gnome-browser-connector from the AUR
 - to get sound working, install sof-firmware
 - to get past the error "filesystem type ntfs3,ntfs not configured in kernel" when opening ntfs USB drives, do the following:
@@ -543,6 +545,7 @@ inside /etc/default/grab
 then run
 >> sudo grub-update (may need to install grub-update first)
 that's from this guide here https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux
+- disable hot corner in settings > multitasking
 
 Apps:
 variety, steam, discord, vscode, dconf editor (will need for some things like disabling double tap to drag)
