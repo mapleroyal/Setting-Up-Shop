@@ -1,5 +1,39 @@
----
+**********************************
+FIX FOR GNOME OPENS DESKTOP HOME FOLDER IN VSCODE OR SOMETHING OTHER THAN NAUTILUS
+https://gitlab.gnome.org/GNOME/nautilus/-/issues/2662#note_1603974
+- Check mimetype associated with opening directories (will probably display something such as code.desktop), by running
+>> xdg-mime query default inode/directory
+- make sure nautilus.desktop exists in /usr/share/applications
+	- if it doesn't, create it with these contents https://gitlab.gnome.org/GNOME/nautilus/blob/master/data/org.gnome.Nautilus.desktop.in.in (note the file will be called nautilus.desktop despite the filename in that link), as follows:
+	[Desktop Entry]
+	Name=Files
+	Comment=Access and organize files
+	# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+	Keywords=folder;manager;explore;disk;filesystem;nautilus;
+	Exec=nautilus --new-window %U
+	# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+	Icon=@icon@
+	Terminal=false
+	Type=Application
+	DBusActivatable=true
+	StartupNotify=true
+	Categories=GNOME;GTK;Utility;Core;FileManager;
+	MimeType=inode/directory;application/x-7z-compressed;application/x-7z-compressed-tar;application/x-bzip;application/x-bzip-compressed-tar;application/x-compress;application/x-compressed-tar;application/x-cpio;application/x-gzip;application/x-lha;application/x-lzip;application/x-lzip-compressed-tar;application/x-lzma;application/x-lzma-compressed-tar;application/x-tar;application/x-tarz;application/x-xar;application/x-xz;application/x-xz-compressed-tar;application/zip;application/gzip;application/bzip2;application/vnd.rar;
+	X-GNOME-UsesNotifications=true
+	Actions=new-window;
 
+	[Desktop Action new-window]
+	Name=New Window
+	Exec=nautilus --new-window
+- then run
+>> xdg-mime default nautilus.desktop inode/directory
+
+
+**********************************
+CHANGING CURSORS
+extractor cursor zips to ~/.local/share/icons/ then change them via the appearance section in the gnome tweaks app
+
+**********************************
 YUZU
 put prod.keys in /home/archer/.var/app/org.yuzu_emu.yuzu/data/yuzu/keys/
 put firmware files in /home/archer/.var/app/org.yuzu_emu.yuzu/data/yuzu/nand/system/Contents/registered/
@@ -10,46 +44,40 @@ put prod.keys in /home/archer/.var/app/org.ryujinx.Ryujinx/config/Ryujinx/system
 install the firmware by opening ryujinx > tools > install firmware from zip > choose firmware
 put mods (at least for pokemon scarlet) in /home/archer/.var/app/org.ryujinx.Ryujinx/config/Ryujinx/mods/contents/0100a3d008c5c000/
 
----
-
+**********************************
 NO GRUB AFTER INSTALLING WINDOWS
 https://youtu.be/gEB6JEYZekE?t=346
 use supergrub2 (install as bottable usb), when it boots choose to detect boot methods, select the distro install you want (the list might go much further down than what's shown, use arrows if needed), once in your distro install grub-customizer, file > install to MBR > then save if the configuration shows your distros > after reboot, it should default to grub, I'm not sure if windows showed in grub so the next step may be to make sure windows shows up
 
----
-
+**********************************
 CHANGE LOCK SCREEN BACKGROUND AND LOGIN SCREEN (DISPLAY MANAGER) BACKGROUND IN PLASMA SDDM
-login screen: settings > startup and shutdown > login screen (SDDM) > click the "change background" button when hovering over the theme you want to use
+login screen: settings > startup and shutdown > login  screen (SDDM) > click the "change background" button when hovering over the theme you want to use
 lock screen: settings > workspace behavior > screen locking > select "configure" under "appearance"
 
----
-
+**********************************
 FIX TEAMVIEWER SIGNING OUT NOT STAYING SIGNED IN
 https://community.teamviewer.com/English/discussion/43766/teamviewer-13-not-staying-signed-in
 Stop daemon
+>> sudo teamviewer daemon stop
+Edit /opt/teamviewer/config/global.conf to add...
+[int32] AllowedConnectionProtocols = 12
+Restart the deamon...
+>> sudo teamviewer daemon start
 
-> > sudo teamviewer daemon stop
-> > Edit /opt/teamviewer/config/global.conf to add...
-> > [int32] AllowedConnectionProtocols = 12
-> > Restart the deamon...
-> > sudo teamviewer daemon start
-
----
-
+**********************************
 INSTALLING WINDOWS IN KVM/QEMU
 https://youtu.be/wxxP39cNJOs?t=404
 In a nutshel:
-
 - install virt-manger etc, i really have no idea what each part is for so I just installed all this (sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat) from here https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/ and anything else it needs from that page (libguestfs, ebtables, iptables) without uninstalling anything that I currently have
 - remember to do this step from there also: sudo systemctl enable --now libvirtd.service
-- and then check that it's working systemctl status libvirtd.service again all this stuff is on that page
+- and then check that it's working  systemctl status libvirtd.service again all this stuff is on that page
 - in virt-manager, new vm > local install media
 - preferences > make sure enable xml editing is enabled
 - when setting up vm settings with the win10 iso, change the NIC "Device model" and the SATA Disk 1 "Disk bus" to "virtio"
 - change CPUs as needed
 - get the following file:
-  https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/
-  ^ here, go into the most recent folder and get virtio-win.iso
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/
+^ here, go into the most recent folder and get virtio-win.iso
 - back in virt-manager do add hardware > storage > and set Device Type to CDROM
 - in SATA CDROM 2 mount the virtio-win.iso
 - begin installation
@@ -57,8 +85,7 @@ In a nutshel:
 - next > proceed with normal install and setup
 - windows won't have internet until you go into device manager and use the drivers on that iso (virtio-win.iso) to install the stuff that has a yellow exclamation in device manager
 
----
-
+**********************************
 VMWARE HORIZON, DOD CAC READER CERTS
 The instructions at the arch wiki work perfectly, https://wiki.archlinux.org/title/Common_Access_Card
 When you're all done, to use vmware horizon you have to go into file > preferences > enable "Do not verify server identity certificates."
@@ -101,11 +128,10 @@ Note: As of the 5.9 version of the certificate zip
     Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_4.der.p7b
     Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_5.der.p7b
     Certificates_PKCS7_v5.9_DoD.pem.p7b
-
-** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
-** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
+    
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 The actual files I found are
-
 - Certificates_PKCS7_v5.9_DoD.der.p7b
 - Certificates_PKCS7_v5.9_DoD.pem.p7b
 - Certificates_PKCS7_v5.9_DoD.sha256
@@ -113,8 +139,8 @@ The actual files I found are
 - Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_4.der.p7b
 - Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_5.der.p7b
 - DoD_PKE_PEM.pem
-  ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
-  ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 
 Chromium/Google Chrome
 
@@ -134,14 +160,14 @@ Reason: The following step is NOT WORKING WITH v5.4 of certs because Chrome does
 
 3. Navigate (in a shell) to the location of the unzip DoD PKI files and install via:
 
-for n in $(ls * | grep Chrome); do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
+ for n in $(ls * | grep Chrome); do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
 
 or
 
 Re-open Chrome, Navigate to Settings -> Show Advanced Settings -> Manage Certificates -> Authorities to load CA bundle from the PEM-formatted file from above.
 
 4. Verify the authority is in Chrome under Settings -> Show Advanced Settings -> Manage Certificates -> Authorities then expand "org-U.S. Government" and you should see a number of "DoD" certificates listed.
-   VMware Horizon Client
+VMware Horizon Client
 
 Install vmware-horizon-clientAUR, vmware-horizon-usbAUR, and vmware-horizon-smartcardAUR. Start and enable vmware-horizon-usb.service.
 
@@ -149,124 +175,99 @@ To integrate CAC authentication with the VMware Horizon Client, create the direc
 
 # ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
 
-** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
-** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 What that means is:
-
 - copy the file /usr/lib/pkcs11/opensc-pkcs11.so to /usr/lib/vmware/view/pkcs11/ and rename it there to libopenscpkcs11.so
 - in vmware horizon, go to file > preferences > enable "Do not verify server identity certificates."
 - THEN run the command:
-  > > sudo ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
-  > > ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
-  > > ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE \*\*
+>> sudo ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 
----
 
+**********************************
 install kwalletmanager and set the password to an empty password, that way the system will not constantly nag you for yet another password every time it tries to do anything (this non-nagging is the default way on every other OS, it's separate from when things often ask you for your root/login password which is normal)
 
----
-
+**********************************
 KDE SETTINGS ADJUSTMENTS
 remember to toggle on the keyboard shortcuts for switching desktops left and right, that way i can use the mouse to switch desktops by assigning mouse keys to those keyboard shortcuts
 
----
-
+**********************************
 KEYCHRON K10 KEYBOARD
 The function keys will not disable, even after holding fn+x+l four 4 seconds in windows mode and seeing the keyboard respond by blinking. What's happening is that it is disabling (at least, it's now set that way in the keyboard, and if you do it again it will unset it), but linux hasn't been set up to acknowledge the change. To make the change noticed on the linux side, run
-
-> > echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
-> > and to make it permanent, run
-> > echo "options hid_apple fnmode=0" | sudo tee -a /etc/modprobe.d/hid_apple.conf
-> > (the above command simply adds the line
-> > options hid_apple fnmode=0
-> > to a file called hid_apple.conf, and creates the file if it doesn't exist).
-> > https://mikeshade.com/posts/keychron-linux-function-keys/
+>> echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
+and to make it permanent, run
+>> echo "options hid_apple fnmode=0" | sudo tee -a /etc/modprobe.d/hid_apple.conf
+(the above command simply adds the line
+options hid_apple fnmode=0
+to a file called hid_apple.conf, and creates the file if it doesn't exist).
+https://mikeshade.com/posts/keychron-linux-function-keys/
 
 Next, because you have to be in windows mode for the above to work, you can remap the meta key to be in mac mode by using Input Remapper
-
-> > sudo pacaur -S input-remapper-git
+>> sudo pacaur -S input-remapper-git
 
 May also be recommended to fix bluetooth constantly disconnecting requiring reboot, to do this requires disabling keyboard sleeping (happens after 10min of no use). Hold fn+s+o for 4 seconds.
 
----
-
+**********************************
 ENABLE BLUETOOTH
+>> sudo pacman -S bluez-utils
+>> systemctl enable --now bluetooth.service
 
-> > sudo pacman -S bluez-utils
-> > systemctl enable --now bluetooth.service
-
----
-
+**********************************
 MAKE SURE YOU ADD USER.NAME AND USER.EMAIL TO GIT
+>> git config --global user.name "FIRST_NAME LAST_NAME"
+>> git config --global user.email "MY_NAME@example.com"
 
-> > git config --global user.name "FIRST_NAME LAST_NAME"
-> > git config --global user.email "MY_NAME@example.com"
-
----
-
+**********************************
 TRANSPARENT KONSOLE TERMINAL BACKGROUND
 Add a kwin rule with 90% opacity. Enable blur from desktop effects & enable background blur from konsole profile > appearance section.
 
----
-
+**********************************
 MOUSE/TOUCHPAD
-
 - disable bottom corner right click, change to press with two fingers anywhere
 - invert scrolling
 - disable tap-and-drag
 
 OTHER
-
 - change to dark theme
 - change desktops to 4 and only 1 row, disable wraps around
 - fix power settings (mainly when to dim and turn off display, but also the low-battery settings)
 - set clipboard history to 1000
 
----
-
+************************
 DOLPHIN
-
 - settings > uncheck "show selection marker"
 - overflow > show hidden files; show panels > terminal
 
----
-
+************************
 DISPLAY
-
 - fix wrong resolution on big monitor (add custom resolution, this method only works in x11)
-  https://wiki.archlinux.org/title/xrandr#Permanently_adding_undetected_resolutions
-  > > xrandr
-  > > cvt 2560 1440
-  > > xrandr --newmode "2560x1440_60.00" 312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +vsync
-  > > xrandr --addmode DP-3-2 2560×1440_60.00
-  > > xrandr --output DP-3-2 --mode 2560×1440_60.00
-
+https://wiki.archlinux.org/title/xrandr#Permanently_adding_undetected_resolutions
+>> xrandr
+>> cvt 2560 1440
+>> xrandr --newmode "2560x1440_60.00" 312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +vsync
+>> xrandr --addmode DP-3-2 2560×1440_60.00
+>> xrandr --output DP-3-2 --mode 2560×1440_60.00
 # on some systems, with kernel 5.15.60-1, this will cause the screen to go black for a
-
 couple seconds any time the mouse moves near the bottom left or top left quadrants; this can be fixed by switching kernels
-
 # then to make the resolution permanent.
-
-> > sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
-
+>> sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
 # paste in the following, then save it
-
 Section "Monitor"
-Identifier "VGA1"
-Modeline "2560x1440_60.00" 312.25 2560 2752 3024 3488 1440 1443 1448 1493 -hsync +VSVnC
-Option "PreferredMode" 2560×1440_60.00
+    Identifier "VGA1"
+    Modeline "2560x1440_60.00"  312.25  2560 2752 3024 3488 1440 1443 1448 1493 -hsync +VSVnC
+    Option "PreferredMode" 2560×1440_60.00
 EndSection
 
----
-
+************************
 GENERAL SETTINGS
-
 - virtual desktops > 1 row, 4 desktops
 - enable "overview" in workspace behavior > desktop effects (this is the metaw effect, aka expose or whatever) (this enables allows the middle-click-to-close functionality)
 - while there, can also enable wobbly windows and magic lamp, to get the mac-like feel (i disabled wobbly windows because they made it look broken when you snap to an edge), and slide back
 - also there, in > screen edges, disable the corner
 - 24 hour clock: right click clock > configure digital clock > set "time display" to 24-
-  hour
+hour
 - workspace > desktop session > enable "restore previous saved session"
 - shortcuts > custom shortcuts > enable "examples" and in there enable "run konsole" and change the shortcut to meta+return ** OR ** shortcuts > add application > konsole > find it in the list and add a shortcut
 - if you don't want hibernate, disable any hibernation related settings in (search hibernate) power management > activity power settings (all three tabs) and advanced power settings
@@ -274,8 +275,8 @@ GENERAL SETTINGS
 - splash screen > none
 - desktop session > disable "confirm logout"
 
----
 
+**********************************************
 INSTALL YAY, SO YOU CAN INSTALL PAMAC
 cd /opt
 sudo git clone https://aur.archlinux.org/yay-git.git
@@ -285,38 +286,34 @@ makepkg -si
 sudo yay -Syu
 sudo yay -S pamac-aur <- TRY WITHOUT SUDO IF GET ERROR
 
----
-
+**********************************************
 - TAP TO CLICK IS GRAYED OUT IN KDE
-  You have to be using wayland. When using wayland, gestures may get fucky. See the next tip on touchpad gestures to resolve it.
+You have to be using wayland. When using wayland, gestures may get fucky. See the next tip on touchpad gestures to resolve it.
 
----
-
+**********************************************
 - GET TOUCHPAD GESTURES AND PALM REJECTION WORKING IN KDE
-
 1. use wayland, because only it supports libinput rather than synaptics
 2. things should work, but if they aren't, consider the following. Install
-   sudo pacman -S --needed wmctrl xdotool
-   git clone https://github.com/bulletmark/libinput-gestures.git
-   cd libinput-gestures
-   sudo ./libinput-gestures-setup install
-   (or if that doesn't work, i think you just need to install libinput-gestures, more info at the site on the next line)
-   https://github.com/bulletmark/libinput-gestures
-   This command makes it start with the system
-   libinput-gestures-setup autostart start
-   Put the conf file here:
-   ~/.config/libinput-gestures.conf
-   use
-   libinput-gestures-setup stop
-   and
-   libinput-gestures-setup start
-   to make it recognize new changes to the conf file whenever you make adjustments to it
+sudo pacman -S --needed wmctrl xdotool
+git clone https://github.com/bulletmark/libinput-gestures.git
+cd libinput-gestures
+sudo ./libinput-gestures-setup install
+(or if that doesn't work, i think you just need to install libinput-gestures, more info at the site on the next line)
+https://github.com/bulletmark/libinput-gestures
+This command makes it start with the system
+libinput-gestures-setup autostart start
+Put the conf file here:
+~/.config/libinput-gestures.conf
+use
+libinput-gestures-setup stop
+and
+libinput-gestures-setup start
+to make it recognize new changes to the conf file whenever you make adjustments to it
 
----
-
+**********************************************
 - GETTING ZSH SET UP
-  Check shell with
-  echo $SHELL
+Check shell with
+echo $SHELL
 
 Install
 sudo pacman -S zsh zsh-completions
@@ -353,22 +350,19 @@ If those lines don't make history substring search work, try these two lines ins
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
----
-
+**********************************************
 - NO OUTPUT OR INPUT DEVICES FOUND (AUDIO)
-  sudo pacman -S sof-firmware
+sudo pacman -S sof-firmware
 
----
-
+**********************************************
 - DISABLE RIGHT CLICK ON TOUCHPAD CORNERS
-  add
-  #!/bin/bash
-  synclient RightButtonAreaLeft=0
-  synclient RightButtonAreaTop=0
-  to a blank .sh file, make it executable, then add it to startup scripts
+add
+#!/bin/bash
+synclient RightButtonAreaLeft=0
+synclient RightButtonAreaTop=0
+to a blank .sh file, make it executable, then add it to startup scripts
 
----
-
+**********************************************
 - KDE HTML CLOCK SETTINGS
 <html>
 <body>
@@ -394,53 +388,43 @@ or for vertical taskbar
 </body>
 </html>
 
----
-
+**********************************************
 - ERROR: discover currently cannot be used to install any apps arch
-  pacman -S packagekit-qt5
-  https://unix.stackexchange.com/a/679145
-  also consider pacman -S fwupd to get firmware updates
+pacman -S packagekit-qt5
+https://unix.stackexchange.com/a/679145
+also consider pacman -S fwupd to get firmware updates
 
----
-
+**********************************************
 - DATE MENU FORMATTER (vertical)
-  EEE\nd MMM\n\nkkmm\n'hrs'
+EEE\nd MMM\n\nkkmm\n'hrs'
 
----
-
+**********************************************
 - DATE MENU FORMATTER (horizontal)
-  EEE',' d MMM kkmm 'hrs'
+EEE',' d MMM     kkmm 'hrs'
 
----
-
+**********************************************
 - KDE DOLPHIN DARK MODE IN GNOME UBUNTU
-  https://askubuntu.com/questions/1398118/applyin-gtk-themes-to-dolphin
+https://askubuntu.com/questions/1398118/applyin-gtk-themes-to-dolphin
 
----
-
+**********************************************
 - MONITOR RESOLUTION NOT CORRECT
-  https://www.youtube.com/watch?v=LxuB1QJ9eeI
+https://www.youtube.com/watch?v=LxuB1QJ9eeI
 
----
-
+**********************************************
 - SHARING FOLDERS WITH VM
-  https://youtu.be/9FBhcOnCxM8?t=431
-  There will not be dropdowns for Type or Mode, instead change the Driver dropdown to virtio-9p.
+https://youtu.be/9FBhcOnCxM8?t=431
+There will not be dropdowns for Type or Mode, instead change the Driver dropdown to virtio-9p.
 
----
-
+**********************************************
 FIX VIRT-MANAGER (KVM) STATE INACTIVE
+>> sudo virsh net-start default
+https://www.xmodulo.com/network-default-is-not-active.html
 
-> > sudo virsh net-start default
-> > https://www.xmodulo.com/network-default-is-not-active.html
-
----
-
+**********************************************
 INSTALL VIRT-MANAGER KVM/QEMU
 https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/
 
----
-
+**********************************************
 - INSTALL VSCODE IF NOT FROM SNAP STORE
 
 (in arch, it's visual-studio-code-bin)
@@ -468,10 +452,9 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 NOW CONTINUE:
 sudo apt install code
 
----
-
+**********************************************
 - INSTALL TOUCHEGG TOUCHE FOR TOUCHPAD GESTURES
-  Touchegg is a library or whatever that allows touchpad gestures, and touche is the GUI used to configure the gestures
+Touchegg is a library or whatever that allows touchpad gestures, and touche is the GUI used to configure the gestures
 
 Install touchegg:
 sudo add-apt-repository ppa:touchegg/stable
@@ -489,99 +472,94 @@ Install touche:
 flatpak install flathub com.github.joseexposito.touche
 use touche to configure gestures
 
----
-
+**********************************************
 - INSTALL CHROME
-  via .deb file from official site
+via .deb file from official site
 
----
-
+**********************************************
 - FIX BUZZING SOUND WHEN NO AUDIO PLAYING
-  In /etc/pulse/default.pa and /etc/pulse/system.pa, comment out the following line:
-  load-module module-suspend-on-idle
+In /etc/pulse/default.pa and /etc/pulse/system.pa, comment out the following line:
+load-module module-suspend-on-idle
 
----
-
+**********************************************
 - SHOW ALL MANUALLY/INTENTIONALLY INSTALLED APPS
-  comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
+comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
 
----
-
+**********************************************
 - EXTENSIONS
-  color picker
-  dash to panel
-  date menu formatter
-  quick close in overview
-  desktop icons NG (DING)
-  places status indicator
-  sound input & output device chooser
-  tiling assistant
-  toggle night light
-  tray icons
+color picker
+dash to panel
+date menu formatter
+quick close in overview
+desktop icons NG (DING)
+places status indicator
+sound input & output device chooser
+tiling assistant
+toggle night light
+tray icons
 
----
-
+**********************************************
 ADDITIONAL PACKAGES DURING ARCHINSTALL SCRIPT
 neofetch nano firefox git base base-devel zsh zsh-completions bluez-utils wget curl linux-headers linux-firmware noto-fonts noto-fonts-cjk noto-fonts-emoji tlp (only include tlp if using a laptop)
 
 - PACKAGES FOR ARCH
-  git
-  pamac-aur
-  files (nautilus)
-  firefox
-  gedit
-  variety
-  yay-git
-  wget
-  networkmanager
-  neofetch
-  nano
-  wpa_supplicant
-  which
-  visual-studio-code-bin
-  touche
-  touchegg
-  sushi
-  qimgv
-  os-prober
-  noto-fonts
-  nautilus-admin
-  nautilus-empty-file
-  mhwd
-  mhwd-db
-  manjaro-settings-manager
-  gnome-terminal-transparency
-  emote
+git
+pamac-aur
+files (nautilus)
+firefox
+gedit
+variety
+yay-git
+wget
+networkmanager
+neofetch
+nano
+wpa_supplicant
+which
+visual-studio-code-bin
+touche
+touchegg
+sushi
+qimgv
+os-prober
+noto-fonts
+nautilus-admin
+nautilus-empty-file
+mhwd
+mhwd-db
+manjaro-settings-manager
+gnome-terminal-transparency
+emote
 
 - PACKAGES FOR PREVIOUS UBUNTU INSTALL
-  brightness-controller
-  dconf-editor
-  discord
-  flatpak
-  git-all
-  gnome-shell-extension-prefs
-  gnome-software-plugin-flatpak
-  gnome-tweaks
-  google-chrome-stable
-  grub-efi
-  input-remapper
-  linux-generic
-  linux-headers-5.19.2-051902
-  linux-headers-5.19.2-051902-generic
-  linux-image-unsigned-5.19.2-051902-generic
-  linux-modules-5.19.2-051902-generic
-  mainline
-  microsoft-edge-stable
-  neofetch
-  pavucontrol
-  touchegg
-  transmission-gtk
-  variety
-  virt-manager
-  zsh
+brightness-controller
+dconf-editor
+discord
+flatpak
+git-all
+gnome-shell-extension-prefs
+gnome-software-plugin-flatpak
+gnome-tweaks
+google-chrome-stable
+grub-efi
+input-remapper
+linux-generic
+linux-headers-5.19.2-051902
+linux-headers-5.19.2-051902-generic
+linux-image-unsigned-5.19.2-051902-generic
+linux-modules-5.19.2-051902-generic
+mainline
+microsoft-edge-stable
+neofetch
+pavucontrol
+touchegg
+transmission-gtk
+variety
+virt-manager
+zsh
 
----
 
+**********************************************
 ARCH GNOME GUIDE FOR XPS 9720
 
 - additional packages as described above
@@ -589,97 +567,95 @@ ARCH GNOME GUIDE FOR XPS 9720
 - install yay and pamac-aur per the instructions above
 - in pamac settings, toggle AUR on
 - download apps as needed (e.g. vs code (visual-studio-code-bin), discord, steam (native))
-  ^- to install steam, first enable multilib in /etc/pacman.conf like this:
-  > > sudo nano /etc/pacman.conf
-  > > uncomment these lines #[multilib]
-  > > #Include = /etc/pacman.d/mirrorlist
-  > > exit and save with ctrl+x > ctrl+y > enter
-  > > ^then install steam (not steam native) from pamac
-  > > if it doesn't show, the multilib database may not have been downloaded, so you can install it via CLI with
-  > > sudo pacman -Sy steam (the -y part I guess forces it to get necessary databases)
+^- to install steam, first enable multilib in /etc/pacman.conf like this:
+>> sudo nano /etc/pacman.conf
+uncomment these lines
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+exit and save with ctrl+x > ctrl+y > enter
+^then install steam (not steam native) from pamac
+if it doesn't show, the multilib database may not have been downloaded, so you can install it via CLI with
+>> sudo pacman -Sy steam (the -y part I guess forces it to get necessary databases)
 - to install gnome extensions, you need the browser extension (linked in the gnome extensions website) and to get around the error "No such native application org.gnome.chrome_gnome_shell" you need gnome-browser-connector from the AUR
 - to get sound working, install sof-firmware
 - to get past the error "filesystem type ntfs3,ntfs not configured in kernel" when opening ntfs USB drives, do the following:
-  > > sudo nano /etc/udisks2/mount_options.conf
-  > > then add
-  > > [defaults]
-  > > ntfs_defaults=uid=$UID,gid=$GID,noatime,prealloc
-  > > exit and save with ctrl+x > ctrl+y > enter
+>> sudo nano /etc/udisks2/mount_options.conf
+then add
+[defaults]
+ntfs_defaults=uid=$UID,gid=$GID,noatime,prealloc
+exit and save with ctrl+x > ctrl+y > enter
 - to get bluetooth working, run:
-  > > sudo systemctl enable --now bluetooth.service
+>> sudo systemctl enable --now bluetooth.service
 - add keyboard shortcut for the terminal (called kgx):
-  Settings > keyboard > view and customize shortcuts > custom shortcuts > add shortcut > Terminal; kgx; super + return > add
+Settings > keyboard > view and customize shortcuts > custom shortcuts > add shortcut > Terminal; kgx; super + return > add
 - to theme qt apps, install kvantum > change/delete theme > select theme > use this theme, then:
-  add the following to /etc/profile:
-
+add the following to /etc/profile:
 # use kvantum as qt themer
-
 export QT_STYLE_OVERRIDE=kvantum
-
 - to make old gtk apps match the dark theme, install gnome-tweaks and gnome-themes-extra, then go into gnome-tweaks > appearance, and set "legacy applications" to "Adwaita-dark" (or whatever theme)
 - to change the GDM login wallpaper (this is not the same as the lockscreen wallpaper, which is just the desktop wallpaper but blurred) use arch-change-gdm-background from here: https://github.com/anirudhgupta109/arch-change-gdm-background
 - to get the fingerprint sensor working on this machine, install fprintd and then set up the fingerprint in settings (that's in gnome, not sure how to do it in other DEs)
 - to get back/forward gestures working in firefox, add MOZ_ENABLE_WAYLAND=1 to /etc/environment
 - to add kernel parameters, include it in the quoted section at the end of this line:
-  GRUB_CMDLINE-LINX-DEFAULT=""
-  inside /etc/default/grab
-  then run
-  > > sudo grub-update (may need to install grub-update first)
-  > > that's from this guide here https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux
+GRUB_CMDLINE-LINX-DEFAULT=""
+inside /etc/default/grab
+then run
+>> sudo grub-update (may need to install grub-update first)
+that's from this guide here https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux
 - disable hot corner in settings > multitasking
 
 Apps:
 variety, steam, discord, vscode, dconf editor (will need for some things like disabling double tap to drag)
 
 Extensions:
-
 - dash to panel
-  https://extensions.gnome.org/extension/1160/dash-to-panel/
-  https://github.com/home-sweet-gnome/dash-to-panel
+https://extensions.gnome.org/extension/1160/dash-to-panel/
+https://github.com/home-sweet-gnome/dash-to-panel
 - clipboard history
-  https://extensions.gnome.org/extension/4839/clipboard-history/
-  https://github.com/SUPERCILEX/gnome-clipboard-history
+https://extensions.gnome.org/extension/4839/clipboard-history/
+https://github.com/SUPERCILEX/gnome-clipboard-history
 - AppIndicator and KStatusNotifierItem Support (needed to show discord, steam, variety, etc.)
-  https://extensions.gnome.org/extension/615/appindicator-support/
-  https://github.com/ubuntu/gnome-shell-extension-appindicator
-  OR
+https://extensions.gnome.org/extension/615/appindicator-support/
+https://github.com/ubuntu/gnome-shell-extension-appindicator
+OR
 - tray icons reloaded
-  https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
-  https://github.com/MartinPL/Tray-Icons-Reloaded
+https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
+https://github.com/MartinPL/Tray-Icons-Reloaded
 - tiling assistant (for better snapping)
-  https://extensions.gnome.org/extension/3733/tiling-assistant/
-  https://github.com/Leleat/Tiling-Assistant
+https://extensions.gnome.org/extension/3733/tiling-assistant/
+https://github.com/Leleat/Tiling-Assistant
 - quick close in overview
-  https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
-  https://github.com/p91paul/middleclickclose
+https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
+https://github.com/p91paul/middleclickclose
 - color picker
-  https://extensions.gnome.org/extension/3396/color-picker/
-  https://github.com/tuberry/color-picker
+https://extensions.gnome.org/extension/3396/color-picker/
+https://github.com/tuberry/color-picker
 - desktop icons NG (DING)
-  https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/
-  https://gitlab.com/rastersoft/desktop-icons-ng
+https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/
+https://gitlab.com/rastersoft/desktop-icons-ng
 - date menu formatter
-  https://extensions.gnome.org/extension/4655/date-menu-formatter/
-  https://github.com/marcinjakubowski/date-menu-formatter
+https://extensions.gnome.org/extension/4655/date-menu-formatter/
+https://github.com/marcinjakubowski/date-menu-formatter
 
 Custom Settings:
-
 - gnome-text-editor
-  show line numbers, 4 spaces per tab, classic dark theme if you want, highlight current line, display overview map
+	show line numbers, 4 spaces per tab, classic dark theme if you want, highlight current line, display overview map
+	
 - dconf editor
-  in /org/gnome/desktop/peripherals/touchpad/ disable tap-and-drag
-  in /org/gnome/desktop/peripherals/keyboard/ change delay to 300
-  in /org/gnome/nautilus/preferences/ enable always-use-location-entry in order to be able to click in the path
+	in /org/gnome/desktop/peripherals/touchpad/ disable tap-and-drag
+	in /org/gnome/desktop/peripherals/keyboard/ change delay to 300
+	in /org/gnome/nautilus/preferences/ enable always-use-location-entry in order to be able to click in the path
 
 TODO:
 X get bluetooth working
-
 - get audio sounding normal (possible lead is the reddit thread about modifying the kernel to enable subwoofers)
-  X get login screen to show wallpaper (possible lead https://code.mendhak.com/synchronize-login-wallpaper-ubuntu/)
-  X get left/right swipe back/forward working in firefox, it's supposed to work in linux as of a few versions ago
-- get nvidia stuff working - eventually figure out how to have igpu running linux and dgpu running linux or windows in a VM for use with AI generators - see arch wiki page for nvidia
-  X get mouse button shortcuts working (overview, switch desktops, etc)
-  X zsh and powerlevel10k
+X get login screen to show wallpaper (possible lead https://code.mendhak.com/synchronize-login-wallpaper-ubuntu/)
+X get left/right swipe back/forward working in firefox, it's supposed to work in linux as of a few versions ago
+- get nvidia stuff working
+	- eventually figure out how to have igpu running linux and dgpu running linux or windows in a VM for use with AI generators
+	- see arch wiki page for nvidia
+X get mouse button shortcuts working (overview, switch desktops, etc)
+X zsh and powerlevel10k
 - mhwd should be the manjaro settings manager app, to manage kernels and nvidia drivers
-  X get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
-  X !!!!!VMWARE HORIZON!!!!!
+X get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
+X !!!!!VMWARE HORIZON!!!!!
