@@ -93,6 +93,19 @@ Note: As of the 5.9 version of the certificate zip
     Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_4.der.p7b
     Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_5.der.p7b
     Certificates_PKCS7_v5.9_DoD.pem.p7b
+    
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+The actual files I found are
+- Certificates_PKCS7_v5.9_DoD.der.p7b
+- Certificates_PKCS7_v5.9_DoD.pem.p7b
+- Certificates_PKCS7_v5.9_DoD.sha256
+- Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_3.der.p7b
+- Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_4.der.p7b
+- Certificates_PKCS7_v5.9_DoD_DoD_Root_CA_5.der.p7b
+- DoD_PKE_PEM.pem
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 
 Chromium/Google Chrome
 
@@ -127,6 +140,15 @@ To integrate CAC authentication with the VMware Horizon Client, create the direc
 
 # ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
 
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+What that means is:
+- copy the file /usr/lib/pkcs11/opensc-pkcs11.so to /usr/lib/vmware/view/pkcs11/ and rename it there to libopenscpkcs11.so
+- in vmware horizon, go to file > preferences > enable "Do not verify server identity certificates."
+- THEN run the command:
+>> sudo ln -s /usr/lib64/pkcs11/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
+** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE ** NOTE **
 
 
 **********************************
@@ -560,17 +582,28 @@ https://github.com/SUPERCILEX/gnome-clipboard-history
 - AppIndicator and KStatusNotifierItem Support (needed to show discord, steam, variety, etc.)
 https://extensions.gnome.org/extension/615/appindicator-support/
 https://github.com/ubuntu/gnome-shell-extension-appindicator
+OR
+- tray icons reloaded
+https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
+https://github.com/MartinPL/Tray-Icons-Reloaded
 - tiling assistant (for better snapping)
 https://extensions.gnome.org/extension/3733/tiling-assistant/
 https://github.com/Leleat/Tiling-Assistant
 - quick close in overview
 https://extensions.gnome.org/extension/352/middle-click-to-close-in-overview/
 https://github.com/p91paul/middleclickclose
-
-https://github.com/p91paul/middleclickclose
+- color picker
+https://extensions.gnome.org/extension/3396/color-picker/
+https://github.com/tuberry/color-picker
+- desktop icons NG (DING)
+https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/
+https://gitlab.com/rastersoft/desktop-icons-ng
+- date menu formatter
+https://extensions.gnome.org/extension/4655/date-menu-formatter/
+https://github.com/marcinjakubowski/date-menu-formatter
 
 Custom Settings:
-- Gedit
+- gnome-text-editor
 	show line numbers, 4 spaces per tab, classic dark theme if you want, highlight current line, display overview map
 	
 - dconf editor
@@ -582,12 +615,12 @@ TODO:
 X get bluetooth working
 - get audio sounding normal (possible lead is the reddit thread about modifying the kernel to enable subwoofers)
 X get login screen to show wallpaper (possible lead https://code.mendhak.com/synchronize-login-wallpaper-ubuntu/)
-- get left/right swipe back/forward working in firefox, it's supposed to work in linux as of a few versions ago
+X get left/right swipe back/forward working in firefox, it's supposed to work in linux as of a few versions ago
 - get nvidia stuff working
 	- eventually figure out how to have igpu running linux and dgpu running linux or windows in a VM for use with AI generators
 	- see arch wiki page for nvidia
 X get mouse button shortcuts working (overview, switch desktops, etc)
 X zsh and powerlevel10k
 - mhwd should be the manjaro settings manager app, to manage kernels and nvidia drivers
-- get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
-- !!!!!VMWARE HORIZON!!!!!
+X get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
+X !!!!!VMWARE HORIZON!!!!!
