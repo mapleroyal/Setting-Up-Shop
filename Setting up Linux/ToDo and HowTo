@@ -1,4 +1,10 @@
 **********************************
+FIX VS CODE GIT SYNC STUCK SPINNING
+- https://stackoverflow.com/a/74807684
+- Need to revert from git version 2.39 to 2.38
+- It has something to do with authentication so then I think you have to log into github via git while setting it up, separately from all the logins that vs code does
+
+**********************************
 FIX FOR GNOME OPENS DESKTOP HOME FOLDER IN VSCODE OR SOMETHING OTHER THAN NAUTILUS
 https://gitlab.gnome.org/GNOME/nautilus/-/issues/2662#note_1603974
 - Check mimetype associated with opening directories (will probably display something such as code.desktop), by running
