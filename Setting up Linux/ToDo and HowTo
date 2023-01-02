@@ -659,3 +659,10 @@ X zsh and powerlevel10k
 - mhwd should be the manjaro settings manager app, to manage kernels and nvidia drivers
 X get KVM and virtual machines setup and working, especially with nvidia support as mentioned above.
 X !!!!!VMWARE HORIZON!!!!!
+
+
+**********************************
+WIP SECTION ON GETTING HEADLESS DGPU PASSTHROUGH TO A VM IN LINUX ON XPS 9720
+1. get type c dummy plug
+2. echo blacklist nouveau | sudo tee /etc/modprobe.d/disable-nouveau.conf
+	a. step 2 allows the system to not grab the dgpu, or something to that effect, so we can use it for our purposes. however, because of step 2, the machine is in constant overheating mode with fans at max, and the only way to fix that is to undo that step. i think undoing it requires a reboot or at least a logout/login, at which point i may as well just boot into windows where the dgpu works natively. waiting for a response from ipaq about whether that step is necessary.
