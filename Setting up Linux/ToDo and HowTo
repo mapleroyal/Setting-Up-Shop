@@ -1,4 +1,14 @@
 **********************************
+FIX WINDOWS (AND POSSIBLY OTHER OS'S) NOT SHOWING IN GRUB MENU
+- Mount the boot partition (for example, for windows its the windows efi partition)
+>> sudo mount -t vfat /dev/nvme0n1p1 /mnt/winefi (I don't know what -t or vfat do, but the first path is the location of the efi and it can be found by running lsblk or sudo os-prober; and the second path is where to mount it at, it's just a temporary path and that one sounds reasonable, may have to manually create the directory e.g. sudo mkdir /mnt/winefi)
+>> sudo os-prober
+>> sudo grub-mkconfig
+>> reboot
+- It should show in grub now, but it didn't for me but what made it work for me was when I opened grub-customizer after about 30min after the reboot, then I moved windows to the position on the list that I like and saved it and rebooted.
+
+
+**********************************
 FIX VS CODE GIT SYNC STUCK SPINNING
 - https://stackoverflow.com/a/74807684
 - Need to revert from git version 2.39 to 2.38
@@ -672,3 +682,4 @@ WIP SECTION ON GETTING HEADLESS DGPU PASSTHROUGH TO A VM IN LINUX ON XPS 9720
 1. get type c dummy plug
 2. echo blacklist nouveau | sudo tee /etc/modprobe.d/disable-nouveau.conf
 	a. step 2 allows the system to not grab the dgpu, or something to that effect, so we can use it for our purposes. however, because of step 2, the machine is in constant overheating mode with fans at max, and the only way to fix that is to undo that step. i think undoing it requires a reboot or at least a logout/login, at which point i may as well just boot into windows where the dgpu works natively. waiting for a response from ipaq about whether that step is necessary.
+
